@@ -36,7 +36,7 @@ const CONTACT = {
 };
 
 const assets = {
-  hero: '/assets/hero-drone-v3.jpg?v=3',
+  hero: '/assets/hero-drone-clean-v4.jpg?v=4',
   process: '/assets/process-drone-v3.jpg?v=3',
   search: '/assets/service-search.jpg?v=3',
   residential: '/assets/service-residential.jpg?v=3',
@@ -220,12 +220,11 @@ export default function App() {
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.65, delay: 0.1 }}>
             <div className="relative overflow-hidden rounded-[2.2rem] border border-cyan-300/25 bg-[#06111f] p-3 shadow-2xl shadow-cyan-500/10">
-              <img src={assets.hero} alt="Dron de vigilancia aérea en operación nocturna" className="h-[520px] w-full rounded-[1.6rem] object-cover object-center" />
-              <div className="absolute inset-x-8 bottom-8 rounded-[1.5rem] border border-cyan-300/20 bg-[#020712]/80 p-6 backdrop-blur">
-                <p className="text-sm font-black uppercase tracking-[0.24em] text-cyan-300">AEROVIGIA-DRONES</p>
-                <h2 className="mt-2 text-2xl font-black md:text-3xl">{t.heroCardTitle}</h2>
-                <p className="mt-3 leading-7 text-slate-300">{t.heroCardText}</p>
-              </div>
+              <img
+                src={assets.hero}
+                alt="Dron profesional de vigilancia aérea en operación nocturna"
+                className="h-[520px] w-full rounded-[1.6rem] object-cover object-center"
+              />
             </div>
           </motion.div>
         </div>
