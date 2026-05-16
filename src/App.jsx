@@ -24,15 +24,19 @@ import seguridadInfraestructuras from './assets/seguridad-infraestructuras.png'
 import proteccionVip from './assets/proteccion-vip-alto-perfil.png'
 import seguridadDronesBusqueda from './assets/seguridad-drones-busqueda-tiempo-real.png'
 
-const PHONE_DISPLAY = '+57 320 801 447'
-const WHATSAPP_NUMBER = '57320801447'
+const PHONE_DISPLAY_EMIRATES = '+971 50 880 1447'
+const PHONE_DISPLAY_COLOMBIA = '+57 321 903 1332'
+const WHATSAPP_EMIRATES = '971508801447'
+const WHATSAPP_COLOMBIA = '573219031332'
 const PRIMARY_EMAIL = 'brigada13@hotmail.com'
 const SECONDARY_EMAIL = 'wilmerbello75@gmail.com'
 
 const whatsappMessage = encodeURIComponent(
   'Hola, quiero información sobre AEROVIGIA-DRONES y sus servicios de seguridad aérea con drones.'
 )
-const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`
+const whatsappUrlEmirates = `https://wa.me/${WHATSAPP_EMIRATES}?text=${whatsappMessage}`
+const whatsappUrlColombia = `https://wa.me/${WHATSAPP_COLOMBIA}?text=${whatsappMessage}`
+const whatsappUrl = whatsappUrlEmirates
 
 const services = [
   {
@@ -286,9 +290,10 @@ function App() {
                 el nivel de riesgo y te orientamos sobre la mejor solución de vigilancia, supervisión o rescate aéreo.
               </p>
               <div className="ctaActions">
-                <a className="btn btnPrimary" href={whatsappUrl} target="_blank" rel="noreferrer">
-                  Quiero mi asesoría gratis <ArrowRight size={17} />
+                <a className="btn btnPrimary" href={whatsappUrlEmirates} target="_blank" rel="noreferrer">
+                  WhatsApp Emiratos <ArrowRight size={17} />
                 </a>
+                <a className="btn btnDark" href={whatsappUrlColombia} target="_blank" rel="noreferrer">WhatsApp Colombia</a>
                 <a className="btn btnDark" href={`mailto:${PRIMARY_EMAIL}`}>Enviar correo <Mail size={16} /></a>
               </div>
             </div>
@@ -311,13 +316,15 @@ function App() {
               <small>Grupo Drones y Movilidad</small>
               <div className="contactList">
                 <div><MapPin size={16} /> Colombia</div>
-                <div><span>☏</span> {PHONE_DISPLAY}</div>
+                <div><span>☏</span> Emiratos Árabes Unidos: {PHONE_DISPLAY_EMIRATES}</div>
+                <div><span>☏</span> Colombia: {PHONE_DISPLAY_COLOMBIA}</div>
                 <div><Plane size={16} /> Operación en Colombia</div>
                 <div><Mail size={16} /> {PRIMARY_EMAIL}</div>
                 <div><Mail size={16} /> {SECONDARY_EMAIL}</div>
               </div>
               <div className="contactActions">
-                <a className="btn btnPrimary" href={whatsappUrl} target="_blank" rel="noreferrer">Hablar por WhatsApp</a>
+                <a className="btn btnPrimary" href={whatsappUrlEmirates} target="_blank" rel="noreferrer">WhatsApp Emiratos</a>
+                <a className="btn btnDark" href={whatsappUrlColombia} target="_blank" rel="noreferrer">WhatsApp Colombia</a>
                 <a className="btn btnDark" href={`mailto:${PRIMARY_EMAIL}`}>Enviar correo <Mail size={16} /></a>
               </div>
             </div>

@@ -14,3 +14,9 @@ Archivos clave:
 - public/drone-control-visual-mejorada.png
 - src/App.jsx
 - src/styles.css
+
+Actualización de teléfonos:
+- Emiratos Árabes Unidos: +971 50 880 1447
+- Colombia: +57 321 903 1332
+- WhatsApp principal: Emiratos Árabes Unidos
+- Botón adicional: WhatsApp Colombia
