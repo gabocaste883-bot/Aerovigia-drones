@@ -21,6 +21,8 @@ import wilmerPhoto from './assets/wilmer-bello-caicedo.png'
 import droneControl from './assets/drone-control-visual.png'
 import escoltasValores from './assets/escoltas-aereas-valores.png'
 import seguridadInfraestructuras from './assets/seguridad-infraestructuras.png'
+import proteccionVip from './assets/proteccion-vip-alto-perfil.png'
+import seguridadDronesBusqueda from './assets/seguridad-drones-busqueda-tiempo-real.png'
 
 const PHONE_DISPLAY = '+57 320 801 447'
 const WHATSAPP_NUMBER = '57320801447'
@@ -37,15 +39,13 @@ const services = [
     icon: Target,
     title: 'Seguridad con drones y búsqueda en tiempo real',
     text: 'Monitoreo aéreo para detectar riesgos, apoyar búsquedas y responder rápidamente ante emergencias o situaciones críticas.',
-    image:
-      'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1200&q=90',
+    image: seguridadDronesBusqueda,
   },
   {
     icon: Crown,
     title: 'Protección VIP de alto perfil',
     text: 'Apoyo aéreo preventivo para la protección de personas de alto perfil, ejecutivos, empresarios y desplazamientos sensibles.',
-    image:
-      'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&q=90',
+    image: proteccionVip,
   },
   {
     icon: Factory,
