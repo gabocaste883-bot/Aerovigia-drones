@@ -78,30 +78,18 @@ select {
   gap: 14px;
 }
 
-.brandIcon {
-  width: 54px;
-  height: 54px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, var(--cyan), #65f3ff);
-  color: #00121c;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 12px 36px rgba(81, 232, 255, 0.25);
+.brandLogoLink {
+  flex: 0 0 auto;
+  max-width: 340px;
 }
 
-.brand strong {
+.brandLogoHeader {
   display: block;
-  color: var(--white);
-  font-size: 1rem;
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-
-.brand span {
-  display: block;
-  color: var(--muted);
-  font-size: 0.78rem;
-  margin-top: 5px;
+  width: 320px;
+  max-width: 32vw;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 24px rgba(81, 232, 255, 0.18));
 }
 
 .navLinks {
@@ -751,6 +739,11 @@ select {
     display: inline-flex;
   }
 
+  .brandLogoHeader {
+    width: 250px;
+    max-width: 68vw;
+  }
+
   .navLinks,
   .navActions {
     display: none;
@@ -805,5 +798,13 @@ select {
 
   .btn {
     width: 100%;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .brandLogoHeader {
+    width: 205px;
+    max-width: 64vw;
   }
 }

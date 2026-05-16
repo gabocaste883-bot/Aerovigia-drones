@@ -23,6 +23,7 @@ import escoltasValores from './assets/escoltas-aereas-valores.png'
 import seguridadInfraestructuras from './assets/seguridad-infraestructuras.png'
 import proteccionVip from './assets/proteccion-vip-alto-perfil.png'
 import seguridadDronesBusqueda from './assets/seguridad-drones-busqueda-tiempo-real.png'
+import logoHeader from './assets/aerovigia-logo-header-web.png'
 
 const PHONE_DISPLAY_EMIRATES = '+971 50 880 1447'
 const PHONE_DISPLAY_COLOMBIA = '+57 321 903 1332'
@@ -101,12 +102,8 @@ function App() {
     <div className="page">
       <header className="topbar">
         <div className="container nav">
-          <a className="brand" href="#inicio" aria-label="AEROVIGIA-DRONES inicio" onClick={closeMenu}>
-            <div className="brandIcon"><Plane size={30} strokeWidth={3} /></div>
-            <div>
-              <strong>AEROVIGIA-DRONES</strong>
-              <span>Grupo Drones y Movilidad</span>
-            </div>
+          <a className="brand brandLogoLink" href="#inicio" aria-label="AEROVIGIA-DRONES inicio" onClick={closeMenu}>
+            <img className="brandLogoHeader" src={logoHeader} alt="AEROVIGIA-DRONES" />
           </a>
 
           <nav className={`navLinks ${menuOpen ? 'active' : ''}`}>

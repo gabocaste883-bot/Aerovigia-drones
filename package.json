@@ -1,4 +1,8 @@
 {
+  "name": "aerovigia-drones-landing",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -9,10 +13,7 @@
     "vite": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "lucide-react": "latest",
-    "framer-motion": "latest",
-    "tailwindcss": "latest",
-    "@tailwindcss/vite": "latest"
+    "lucide-react": "latest"
   },
   "devDependencies": {}
 }
