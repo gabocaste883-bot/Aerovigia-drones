@@ -19,6 +19,8 @@ import {
 import { useState } from 'react'
 import wilmerPhoto from './assets/wilmer-bello-caicedo.png'
 import droneControl from './assets/drone-control-visual.png'
+import escoltasValores from './assets/escoltas-aereas-valores.png'
+import seguridadInfraestructuras from './assets/seguridad-infraestructuras.png'
 
 const PHONE_DISPLAY = '+57 320 801 447'
 const WHATSAPP_NUMBER = '57320801447'
@@ -49,15 +51,13 @@ const services = [
     icon: Factory,
     title: 'Seguridad de infraestructuras',
     text: 'Supervisión aérea de activos, perímetros, instalaciones industriales, zonas privadas e infraestructura crítica.',
-    image:
-      'https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1200&q=90',
+    image: seguridadInfraestructuras,
   },
   {
     icon: Truck,
     title: 'Escoltas aéreas de valores',
     text: 'Acompañamiento aéreo para rutas, transporte de valores y operaciones donde se requiere detección temprana de amenazas.',
-    image:
-      'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1200&q=90',
+    image: escoltasValores,
   },
 ]
 

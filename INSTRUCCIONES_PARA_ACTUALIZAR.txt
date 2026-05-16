@@ -1,27 +1,18 @@
-INSTRUCCIONES PARA ACTUALIZAR LA LANDING EN GITHUB / VERCEL
+INSTRUCCIONES PARA ACTUALIZAR AEROVIGIA-DRONES
 
-1. Abre el repositorio en GitHub.
-2. En la raíz del repositorio, entra en "Añadir archivo" > "Subir archivos".
-3. Sube TODO el contenido de esta carpeta, no subas el ZIP:
+1. Descomprime este ZIP.
+2. En GitHub, reemplaza/sube todo el contenido de esta carpeta en la raíz del repositorio.
+3. Asegúrate de subir completas las carpetas src y public.
+4. Las nuevas imágenes ya están integradas en src/assets y public:
+   - escoltas-aereas-valores.png
+   - seguridad-infraestructuras.png
+   - wilmer-bello-caicedo.png
+   - drone-control-visual.png
+5. Haz Commit changes.
+6. Vercel hará el despliegue automático.
 
-   - index.html
-   - package.json
-   - vite.config.js
-   - README.md
-   - public/
-   - src/
-
-4. Acepta reemplazar los archivos existentes cuando GitHub lo pida.
-5. Guarda con el botón verde "Commit changes".
-6. Vercel debería actualizar automáticamente la página.
-
-IMPORTANTE:
-- La foto de Wilmer y la imagen del dron están dentro de src/assets.
-- También se dejaron copias en public como respaldo.
-- No elimines la carpeta src/assets.
-
-Configuración Vercel:
-- Framework: Vite
-- Install command: npm install
-- Build command: npm run build
-- Output directory: dist
+Cambios incluidos:
+- Imagen profesional nueva para Escoltas aéreas de valores.
+- Imagen profesional nueva para Seguridad de infraestructuras.
+- Foto de Wilmer integrada como asset local.
+- Imagen de dron en sección Cómo trabajamos integrada como asset local.
