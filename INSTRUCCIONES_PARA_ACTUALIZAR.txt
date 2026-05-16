@@ -1,26 +1,16 @@
-ACTUALIZACIÓN AEROVIGIA-DRONES
+AEROVIGIA-DRONES — Landing actualizada
 
-Esta versión mejora la sección "Cómo trabajamos".
+Esta versión mantiene la misma estructura de la sección "Cómo trabajamos".
+Solo se ajustó la imagen del dron para que sea la misma, pero más clara y un poco más grande.
 
-CAMBIO PRINCIPAL:
-- La imagen del dron ya no aparece como una imagen pequeña.
-- Ahora queda como fondo completo de toda la sección.
-- El contenido queda encima de la imagen con degradado oscuro para mejor lectura.
-- Las tarjetas de los pasos tienen estilo tecnológico / glassmorphism.
+Para actualizar en GitHub:
+1. Sube y reemplaza todo el contenido de esta carpeta en la raíz del repositorio.
+2. Reemplaza: index.html, package.json, vite.config.js, src/ y public/.
+3. Haz Commit changes.
+4. Vercel debería desplegar automáticamente.
 
-ARCHIVOS A CARGAR EN GITHUB:
-- index.html
-- package.json
-- vite.config.js
-- src/
-- public/
-
-INSTRUCCIONES:
-1. Descomprime este ZIP.
-2. Entra a la carpeta aerovigia_drones_landing_proceso_full_imagen.
-3. Sube todos los archivos y carpetas al repositorio de GitHub, reemplazando los existentes.
-4. Haz Commit changes.
-5. Vercel actualizará automáticamente la landing.
-
-IMPORTANTE:
-No subir solo el index.html. Debes subir también src/ y public/ para que carguen correctamente las imágenes y estilos.
+Archivos clave:
+- src/assets/drone-control-visual-mejorada.png
+- public/drone-control-visual-mejorada.png
+- src/App.jsx
+- src/styles.css
