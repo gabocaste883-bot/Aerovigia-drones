@@ -1,21 +1,26 @@
-INSTRUCCIONES PARA ACTUALIZAR AEROVIGIA-DRONES EN GITHUB / VERCEL
+ACTUALIZACIÓN AEROVIGIA-DRONES
 
+Esta versión mejora la sección "Cómo trabajamos".
+
+CAMBIO PRINCIPAL:
+- La imagen del dron ya no aparece como una imagen pequeña.
+- Ahora queda como fondo completo de toda la sección.
+- El contenido queda encima de la imagen con degradado oscuro para mejor lectura.
+- Las tarjetas de los pasos tienen estilo tecnológico / glassmorphism.
+
+ARCHIVOS A CARGAR EN GITHUB:
+- index.html
+- package.json
+- vite.config.js
+- src/
+- public/
+
+INSTRUCCIONES:
 1. Descomprime este ZIP.
-2. Entra a la carpeta aerovigia_drones_landing_final_4imagenes.
-3. Sube TODO el contenido a la raíz del repositorio de GitHub.
-4. Reemplaza los archivos existentes cuando GitHub lo solicite.
-5. Haz clic en Commit changes.
-6. Vercel debe desplegar automáticamente la nueva versión.
-
-Esta versión incluye las 4 imágenes profesionales de servicios:
-- seguridad-drones-busqueda-tiempo-real.png
-- proteccion-vip-alto-perfil.png
-- seguridad-infraestructuras.png
-- escoltas-aereas-valores.png
-
-También incluye:
-- wilmer-bello-caicedo.png
-- drone-control-visual.png
+2. Entra a la carpeta aerovigia_drones_landing_proceso_full_imagen.
+3. Sube todos los archivos y carpetas al repositorio de GitHub, reemplazando los existentes.
+4. Haz Commit changes.
+5. Vercel actualizará automáticamente la landing.
 
 IMPORTANTE:
-No subas solo src. Debes subir index.html, package.json, vite.config.js, public/ y src/.
+No subir solo el index.html. Debes subir también src/ y public/ para que carguen correctamente las imágenes y estilos.

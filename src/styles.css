@@ -544,26 +544,83 @@ select {
   flex: 0 0 auto;
 }
 
+.processSection {
+  position: relative;
+  overflow: hidden;
+  min-height: 760px;
+  padding: 128px 0;
+  display: flex;
+  align-items: center;
+  background-image:
+    linear-gradient(90deg, rgba(2, 7, 17, 0.96) 0%, rgba(2, 7, 17, 0.82) 42%, rgba(2, 7, 17, 0.42) 100%),
+    var(--process-bg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: var(--white);
+}
+
+.processSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 68% 40%, rgba(81, 232, 255, 0.22), transparent 35%),
+    linear-gradient(180deg, rgba(2, 7, 17, 0.02), rgba(2, 7, 17, 0.48));
+  pointer-events: none;
+}
+
+.processSection::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(81, 232, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(81, 232, 255, 0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+
 .workGrid {
+  position: relative;
+  z-index: 2;
+  width: 100%;
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
-  gap: 48px;
+  gap: 64px;
   align-items: center;
 }
 
-.workImage {
-  height: 118px;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  margin-top: 28px;
-  background: #020711;
+.processSection .eyebrow {
+  color: var(--cyan);
 }
 
-.workImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.processCopy h2 {
+  color: var(--white);
+  text-shadow: 0 18px 56px rgba(0, 0, 0, 0.66);
+}
+
+.processCopy p {
+  color: #d8e7ff;
+  max-width: 560px;
+  font-size: 1.16rem;
+  text-shadow: 0 12px 34px rgba(0, 0, 0, 0.55);
+}
+
+.processBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+  padding: 14px 18px;
+  border-radius: 18px;
+  background: rgba(81, 232, 255, 0.13);
+  border: 1px solid rgba(81, 232, 255, 0.34);
+  color: var(--cyan);
+  font-weight: 1000;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
 }
 
 .steps {
@@ -576,10 +633,12 @@ select {
   grid-template-columns: 52px 44px 1fr;
   gap: 18px;
   align-items: start;
-  background: #ffffff;
-  padding: 22px;
-  border-radius: 18px;
-  box-shadow: 0 16px 42px rgba(2, 7, 17, 0.09);
+  background: rgba(5, 12, 24, 0.78);
+  border: 1px solid rgba(81, 232, 255, 0.30);
+  backdrop-filter: blur(18px);
+  padding: 26px;
+  border-radius: 24px;
+  box-shadow: 0 26px 76px rgba(0, 0, 0, 0.34);
 }
 
 .stepNumber {
@@ -600,18 +659,19 @@ select {
   place-items: center;
   border-radius: 13px;
   background: rgba(81, 232, 255, 0.2);
-  color: #006983;
+  color: var(--cyan);
 }
 
 .step h3 {
-  color: #020711;
-  font-size: 1.1rem;
-  margin-bottom: 5px;
+  color: var(--white);
+  font-size: 1.12rem;
+  margin-bottom: 7px;
 }
 
 .step p {
-  color: #52657e;
-  font-size: 0.96rem;
+  color: #d8e7ff;
+  font-size: 0.99rem;
+  line-height: 1.75;
 }
 
 .ctaSection {
@@ -769,12 +829,29 @@ select {
     grid-template-columns: 1fr;
   }
 
+  .processSection {
+    padding: 88px 0;
+    background-position: 60% center;
+  }
+
   .hero h1 {
     font-size: clamp(2.7rem, 13vw, 4.6rem);
   }
 
   .heroImage {
     min-height: 310px;
+  }
+
+  .processSection {
+    min-height: auto;
+    padding: 92px 0;
+    background-position: center center;
+  }
+
+  .processSection {
+    background-image:
+      linear-gradient(180deg, rgba(2, 7, 17, 0.96) 0%, rgba(2, 7, 17, 0.84) 54%, rgba(2, 7, 17, 0.58) 100%),
+      var(--process-bg);
   }
 
   .profilePhoto {
