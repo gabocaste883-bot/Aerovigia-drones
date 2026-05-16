@@ -1,251 +1,339 @@
-import React, { useMemo, useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   ArrowRight,
-  BadgeCheck,
   Building2,
-  CheckCircle2,
-  ChevronRight,
+  Check,
+  Crown,
   Factory,
-  Globe2,
   Languages,
-  LifeBuoy,
   Mail,
   MapPin,
   Menu,
-  MessageCircle,
   Plane,
-  Radar,
+  Search,
   Shield,
-  ShieldCheck,
+  Target,
   Truck,
   Users,
   X,
-  Zap,
-  Headphones,
-  MonitorCheck,
-  Search,
-} from 'lucide-react';
+} from 'lucide-react'
+import { useState } from 'react'
+import wilmerPhoto from './assets/wilmer-bello-caicedo.png'
+import droneControl from './assets/drone-control-visual.png'
 
-const CONTACT = {
-  mainPhone: '+971 508 801 447',
-  whatsapp: '971508801447',
-  email1: 'brigada13@hotmail.com',
-  email2: 'wilmerbello75@gmail.com',
-  license: '20252420300059243',
-};
+const PHONE_DISPLAY = '+57 320 801 447'
+const WHATSAPP_NUMBER = '57320801447'
+const PRIMARY_EMAIL = 'brigada13@hotmail.com'
+const SECONDARY_EMAIL = 'wilmerbello75@gmail.com'
 
-const assets = {
-  hero: '/assets/hero-drone-clean-v4.jpg?v=4',
-  process: '/assets/process-drone-v3.jpg?v=3',
-  search: '/assets/service-search.jpg?v=3',
-  residential: '/assets/service-residential.jpg?v=3',
-  industrial: '/assets/service-industrial.jpg?v=3',
-  escort: '/assets/service-escort.jpg?v=3',
-  operator: '/assets/operator-wilmer-bello.jpg?v=3',
-  certificate: '/assets/license-certificate.jpg?v=3',
-  footer: '/assets/drone-footer.jpg?v=3',
-};
+const whatsappMessage = encodeURIComponent(
+  'Hola, quiero información sobre AEROVIGIA-DRONES y sus servicios de seguridad aérea con drones.'
+)
+const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`
 
-const content = {
-  es: {
-    langButton: 'EN',
-    nav: [
-      ['Inicio', '#inicio'],
-      ['Servicios', '#servicios'],
-      ['Licencia', '#licencia'],
-      ['Sectores', '#sectores'],
-      ['Contacto', '#contacto'],
-    ],
-    eyebrow: 'Grupo Drones y Movilidad · Colombia',
-    heroTitle: 'Seguridad, supervisión y rescate en tiempo real con drones.',
-    heroText:
-      'Elevamos la seguridad y la protección de la vida con inteligencia aérea en tiempo real. AEROVIGIA-DRONES ofrece ojos en el cielo para proteger personas, activos, rutas e infraestructura crítica.',
-    primaryCta: 'Solicitar vigilancia aérea',
-    secondaryCta: 'Ver servicios',
-    badge1: 'Localización precisa',
-    badge2: 'Reacción inmediata',
-    badge3: 'Tecnología que salva vidas',
-    heroCardTitle: 'Drones de vigilancia en operación',
-    heroCardText: 'Monitoreo aéreo, cobertura visual, supervisión inteligente y apoyo operativo para tomar decisiones rápidas.',
-    servicesTag: 'Soluciones especializadas',
-    servicesTitle: 'Vigilancia aérea profesional para seguridad, rescate e infraestructura.',
-    servicesText:
-      'AEROVIGIA-DRONES combina drones, supervisión remota y operación táctica para reducir puntos ciegos, mejorar tiempos de reacción y apoyar decisiones críticas.',
-    services: [
-      { icon: LifeBuoy, image: assets.search, title: 'Búsqueda en tiempo real', text: 'Localización inmediata de personas perdidas o desaparecidas mediante apoyo aéreo y tecnología térmica para zonas boscosas, áreas extensas o condiciones de baja visibilidad.' },
-      { icon: Building2, image: assets.residential, title: 'Patrullaje residencial', text: 'Revista dinámica de barrios, conjuntos y edificios. Verificación aérea de alertas sospechosas, reducción de puntos ciegos y monitoreo preventivo.' },
-      { icon: Factory, image: assets.industrial, title: 'Supervisión petrolera e industrial', text: 'Revista técnica de activos críticos, oleoductos e infraestructura estratégica para prevención de riesgos y control visual de zonas sensibles.' },
-      { icon: Truck, image: assets.escort, title: 'Escoltas aéreas de valores', text: 'Acompañamiento aéreo preventivo para transporte de productos de alto valor, detección de amenazas en ruta y apoyo visual en tiempo real.' },
-    ],
-    trustTag: 'Confianza operacional',
-    trustTitle: 'Operación respaldada con licencia de vuelo comercial.',
-    trustText: 'La sección de confianza destaca la capacidad comercial de operación aérea y el enfoque serio de seguridad, supervisión y rescate en tiempo real.',
-    licenseLabel: 'Licencia de vuelo comercial',
-    licenseText: 'Número de licencia comercial para operación con drones en Colombia',
-    certifiedBy: 'Wilmer Bello Caicedo · Grupo Drones y Movilidad',
-    sectorsTag: 'Clientes objetivo',
-    sectorsTitle: 'Diseñado para organizaciones que necesitan visibilidad aérea, control y reacción.',
-    sectors: [
-      [Shield, 'Empresas de seguridad privada'],
-      [Building2, 'Conjuntos residenciales'],
-      [Factory, 'Empresas e industria'],
-      [Truck, 'Transporte de valores'],
-      [Users, 'Eventos y aglomeraciones'],
-      [MapPin, 'Fincas y zonas rurales'],
-    ],
-    processTag: 'Cómo trabajamos',
-    processTitle: 'Del aviso al control visual en tiempo real.',
-    processLead: 'Más visión, menos puntos ciegos y mejor capacidad de reacción.',
-    process: [
-      { number: '01', icon: Headphones, title: 'Activación del caso', text: 'Recibimos la ubicación, tipo de riesgo y necesidad operativa: búsqueda, patrullaje, supervisión o escolta.' },
-      { number: '02', icon: Plane, title: 'Despliegue aéreo', text: 'El equipo realiza inspección aérea para ampliar el campo visual, cubrir zonas críticas y detectar amenazas o señales relevantes.' },
-      { number: '03', icon: MonitorCheck, title: 'Información para actuar', text: 'Entregamos apoyo visual en tiempo real para facilitar decisiones rápidas, coordinación en campo y reacción preventiva.' },
-    ],
-    consultationTitle: '¿Te gustaría saber cómo los drones pueden mejorar la seguridad de tu empresa, conjunto o ruta?',
-    consultationText: 'Contáctanos y recibe una asesoría gratuita. Revisamos tu necesidad, el tipo de zona, el nivel de riesgo y te orientamos sobre la mejor solución de vigilancia, supervisión o rescate aéreo.',
-    consultationCta: 'Quiero mi asesoría gratis',
-    contactTag: 'Contacto',
-    contactTitle: '¿Necesitas ojos en el cielo para proteger una zona, ruta o persona?',
-    contactText: 'Solicita una evaluación del caso y revisemos cómo AEROVIGIA-DRONES puede apoyar con seguridad aérea, supervisión o rescate en tiempo real en Colombia.',
-    whatsappCta: 'Hablar por WhatsApp',
-    emailCta: 'Enviar correo',
-    footer: 'Security, Supervision and Real-Time Rescue · Operación en Colombia',
-    whatsappMessage: 'Hola, quiero solicitar información sobre servicios de AEROVIGIA-DRONES para seguridad, supervisión o rescate en tiempo real. Mi caso es:',
+const services = [
+  {
+    icon: Target,
+    title: 'Seguridad con drones y búsqueda en tiempo real',
+    text: 'Monitoreo aéreo para detectar riesgos, apoyar búsquedas y responder rápidamente ante emergencias o situaciones críticas.',
+    image:
+      'https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=1200&q=90',
   },
-  en: {
-    langButton: 'ES',
-    nav: [
-      ['Home', '#inicio'],
-      ['Services', '#servicios'],
-      ['License', '#licencia'],
-      ['Sectors', '#sectores'],
-      ['Contact', '#contacto'],
-    ],
-    eyebrow: 'Drones and Mobility Group · Colombia',
-    heroTitle: 'Real-time security, supervision and rescue with drones.',
-    heroText: 'We elevate security and the protection of life with real-time aerial intelligence. AEROVIGIA-DRONES provides eyes in the sky to protect people, assets, routes and critical infrastructure.',
-    primaryCta: 'Request aerial surveillance',
-    secondaryCta: 'View services',
-    badge1: 'Precise location',
-    badge2: 'Immediate response',
-    badge3: 'Technology that saves lives',
-    heroCardTitle: 'Surveillance drones in operation',
-    heroCardText: 'Aerial monitoring, visual coverage, intelligent supervision and operational support for fast decisions.',
-    servicesTag: 'Specialized solutions',
-    servicesTitle: 'Professional aerial surveillance for security, rescue and infrastructure.',
-    servicesText: 'AEROVIGIA-DRONES combines drones, remote supervision and tactical operation to reduce blind spots, improve response times and support critical decisions.',
-    services: [
-      { icon: LifeBuoy, image: assets.search, title: 'Real-time search', text: 'Immediate location of missing or lost people through aerial support and thermal technology for forest areas, large zones or low-visibility conditions.' },
-      { icon: Building2, image: assets.residential, title: 'Residential patrol', text: 'Dynamic patrol of neighborhoods, residential complexes and buildings. Aerial verification of suspicious alerts, blind-spot reduction and preventive monitoring.' },
-      { icon: Factory, image: assets.industrial, title: 'Oil and industrial supervision', text: 'Technical review of critical assets, pipelines and strategic infrastructure for risk prevention and visual control of sensitive areas.' },
-      { icon: Truck, image: assets.escort, title: 'Aerial escort for valuables', text: 'Preventive aerial support for high-value transportation routes, threat detection and real-time visual assistance.' },
-    ],
-    trustTag: 'Operational trust',
-    trustTitle: 'Operation backed by a commercial flight license.',
-    trustText: 'This trust section highlights commercial aerial operation capacity and the serious focus on security, supervision and real-time rescue.',
-    licenseLabel: 'Commercial flight license',
-    licenseText: 'Commercial license number for drone operation in Colombia',
-    certifiedBy: 'Wilmer Bello Caicedo · Drones and Mobility Group',
-    sectorsTag: 'Target clients',
-    sectorsTitle: 'Built for organizations that need aerial visibility, control and response.',
-    sectors: [
-      [Shield, 'Private security companies'],
-      [Building2, 'Residential communities'],
-      [Factory, 'Companies and industry'],
-      [Truck, 'Valuable goods transport'],
-      [Users, 'Events and crowds'],
-      [MapPin, 'Farms and rural areas'],
-    ],
-    processTag: 'How we work',
-    processTitle: 'From alert to real-time visual control.',
-    processLead: 'More visibility, fewer blind spots and faster response.',
-    process: [
-      { number: '01', icon: Headphones, title: 'Case activation', text: 'We receive the location, type of risk and operational need: search, patrol, supervision or escort.' },
-      { number: '02', icon: Plane, title: 'Aerial deployment', text: 'The team conducts an aerial inspection to expand the field of view, cover critical areas and detect threats or relevant signals.' },
-      { number: '03', icon: MonitorCheck, title: 'Information to act', text: 'We provide real-time visual support to enable fast decisions, field coordination and preventive response.' },
-    ],
-    consultationTitle: 'Would you like to know how drones can improve the security of your company, community or route?',
-    consultationText: 'Contact us and receive a free consultation. We review your need, area type, risk level and guide you toward the best aerial surveillance, supervision or rescue solution.',
-    consultationCta: 'I want my free consultation',
-    contactTag: 'Contact',
-    contactTitle: 'Do you need eyes in the sky to protect an area, route or person?',
-    contactText: 'Request a case evaluation and let us review how AEROVIGIA-DRONES can support aerial security, supervision or real-time rescue in Colombia.',
-    whatsappCta: 'Message on WhatsApp',
-    emailCta: 'Send email',
-    footer: 'Security, Supervision and Real-Time Rescue · Operation in Colombia',
-    whatsappMessage: 'Hello, I would like information about AEROVIGIA-DRONES services for real-time security, supervision or rescue. My case is:',
+  {
+    icon: Crown,
+    title: 'Protección VIP de alto perfil',
+    text: 'Apoyo aéreo preventivo para la protección de personas de alto perfil, ejecutivos, empresarios y desplazamientos sensibles.',
+    image:
+      'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&q=90',
   },
-};
+  {
+    icon: Factory,
+    title: 'Seguridad de infraestructuras',
+    text: 'Supervisión aérea de activos, perímetros, instalaciones industriales, zonas privadas e infraestructura crítica.',
+    image:
+      'https://images.unsplash.com/photo-1513828583688-c52646db42da?auto=format&fit=crop&w=1200&q=90',
+  },
+  {
+    icon: Truck,
+    title: 'Escoltas aéreas de valores',
+    text: 'Acompañamiento aéreo para rutas, transporte de valores y operaciones donde se requiere detección temprana de amenazas.',
+    image:
+      'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1200&q=90',
+  },
+]
 
-function SectionTag({ children }) {
-  return <p className="mb-3 text-sm font-black uppercase tracking-[0.24em] text-cyan-400">{children}</p>;
-}
+const sectors = [
+  { icon: Shield, label: 'Empresas de seguridad privada' },
+  { icon: Building2, label: 'Conjuntos residenciales' },
+  { icon: Factory, label: 'Empresas e industria' },
+  { icon: Truck, label: 'Transporte de valores' },
+  { icon: Crown, label: 'Protección VIP' },
+  { icon: MapPin, label: 'Fincas y zonas rurales' },
+]
 
-export default function App() {
-  const [lang, setLang] = useState('es');
-  const [menuOpen, setMenuOpen] = useState(false);
-  const t = content[lang];
-  const whatsappUrl = useMemo(() => `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(t.whatsappMessage)}`, [t.whatsappMessage]);
+const steps = [
+  {
+    title: 'Activación del caso',
+    text: 'Recibimos la ubicación, tipo de riesgo y necesidad operativa: búsqueda, patrullaje, supervisión o escolta.',
+    icon: Users,
+  },
+  {
+    title: 'Despliegue aéreo',
+    text: 'El equipo realiza inspección aérea para ampliar el campo visual, cubrir zonas críticas y detectar amenazas o señales relevantes.',
+    icon: Plane,
+  },
+  {
+    title: 'Información para actuar',
+    text: 'Entregamos apoyo visual en tiempo real para facilitar decisiones rápidas, coordinación en campo y reacción preventiva.',
+    icon: Search,
+  },
+]
+
+function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  const closeMenu = () => setMenuOpen(false)
 
   return (
-    <main id="inicio" className="min-h-screen bg-[#020712] text-white">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#020712]/95 backdrop-blur-xl">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-          <a href="#inicio" className="flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300 text-[#020712] shadow-lg shadow-cyan-500/25"><Plane size={28} /></div>
-            <div><p className="text-sm font-black leading-tight">AEROVIGIA-DRONES</p><p className="text-xs text-slate-400">Grupo Drones y Movilidad</p></div>
+    <div className="page">
+      <header className="topbar">
+        <div className="container nav">
+          <a className="brand" href="#inicio" aria-label="AEROVIGIA-DRONES inicio" onClick={closeMenu}>
+            <div className="brandIcon"><Plane size={30} strokeWidth={3} /></div>
+            <div>
+              <strong>AEROVIGIA-DRONES</strong>
+              <span>Grupo Drones y Movilidad</span>
+            </div>
           </a>
-          <div className="hidden items-center gap-7 md:flex">
-            {t.nav.map(([label, href]) => <a key={label} href={href} className="text-sm font-semibold text-slate-300 transition hover:text-cyan-200">{label}</a>)}
+
+          <nav className={`navLinks ${menuOpen ? 'active' : ''}`}>
+            <a href="#inicio" onClick={closeMenu}>Inicio</a>
+            <a href="#servicios" onClick={closeMenu}>Servicios</a>
+            <a href="#perfil" onClick={closeMenu}>Perfil</a>
+            <a href="#sectores" onClick={closeMenu}>Sectores</a>
+            <a href="#contacto" onClick={closeMenu}>Contacto</a>
+          </nav>
+
+          <div className="navActions">
+            <button className="langBtn" type="button"><Languages size={17} /> EN</button>
+            <a className="btn btnPrimary" href={whatsappUrl} target="_blank" rel="noreferrer">
+              Solicitar vigilancia aérea <ArrowRight size={18} />
+            </a>
           </div>
-          <div className="hidden items-center gap-3 md:flex">
-            <button onClick={() => setLang(lang === 'es' ? 'en' : 'es')} className="inline-flex items-center gap-2 rounded-2xl border border-white/15 px-4 py-3 text-sm font-bold text-white transition hover:bg-white/10"><Languages size={16} /> {t.langButton}</button>
-            <a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-2xl bg-cyan-300 px-5 py-3 text-sm font-black text-[#020712] transition hover:scale-[1.02] hover:bg-white">{t.primaryCta} <ArrowRight size={16} /></a>
-          </div>
-          <button className="rounded-xl border border-white/10 p-2 md:hidden" onClick={() => setMenuOpen((v) => !v)}>{menuOpen ? <X size={22} /> : <Menu size={22} />}</button>
-        </nav>
-        {menuOpen && <div className="border-t border-white/10 px-6 py-4 md:hidden"><div className="flex flex-col gap-4">{t.nav.map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)} className="text-sm text-slate-300">{label}</a>)}<button onClick={() => setLang(lang === 'es' ? 'en' : 'es')} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 px-5 py-3 text-sm font-bold text-white"><Languages size={16} /> {t.langButton}</button><a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-300 px-5 py-3 text-sm font-black text-[#020712]">{t.primaryCta} <ArrowRight size={16} /></a></div></div>}
+
+          <button className="menuBtn" type="button" aria-label="Abrir menú" onClick={() => setMenuOpen(!menuOpen)}>
+            {menuOpen ? <X size={23} /> : <Menu size={23} />}
+          </button>
+        </div>
       </header>
 
-      <section className="relative overflow-hidden border-b border-cyan-300/10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(34,211,238,0.20),transparent_35%),radial-gradient(circle_at_20%_85%,rgba(14,165,233,0.16),transparent_30%)]" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-[0.92fr_1.08fr] lg:px-8 lg:py-24">
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.65 }}>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-bold text-cyan-100"><ShieldCheck size={16} /> {t.eyebrow}</div>
-            <h1 className="text-4xl font-black leading-tight tracking-tight md:text-6xl">{t.heroTitle}</h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{t.heroText}</p>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row"><a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-300 px-6 py-4 text-sm font-black text-[#020712] shadow-lg shadow-cyan-500/20 transition hover:scale-[1.02] hover:bg-white">{t.primaryCta} <ArrowRight size={18} /></a><a href="#servicios" className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 px-6 py-4 text-sm font-black text-white transition hover:bg-white/10">{t.secondaryCta} <ChevronRight size={18} /></a></div>
-            <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">{[t.badge1, t.badge2, t.badge3].map((badge) => <div key={badge} className="rounded-2xl border border-white/10 bg-white/[0.05] p-4 text-sm font-bold text-slate-200"><CheckCircle2 className="mb-3 text-cyan-300" size={22} /> {badge}</div>)}</div>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.65, delay: 0.1 }}>
-            <div className="relative overflow-hidden rounded-[2.2rem] border border-cyan-300/25 bg-[#06111f] p-3 shadow-2xl shadow-cyan-500/10">
-              <img
-                src={assets.hero}
-                alt="Dron profesional de vigilancia aérea en operación nocturna"
-                className="h-[520px] w-full rounded-[1.6rem] object-cover object-center"
-              />
+      <main>
+        <section className="hero" id="inicio">
+          <div className="container heroGrid">
+            <div className="heroCopy">
+              <div className="pill"><Shield size={18} /> Grupo Drones y Movilidad · Colombia</div>
+              <h1>Seguridad, supervisión y rescate en tiempo real con drones.</h1>
+              <p>
+                Elevamos la seguridad y la protección de la vida con inteligencia aérea en tiempo real.
+                AEROVIGIA-DRONES ofrece ojos en el cielo para proteger personas, activos, rutas e infraestructura crítica.
+              </p>
+              <div className="heroActions">
+                <a className="btn btnPrimary" href={whatsappUrl} target="_blank" rel="noreferrer">
+                  Solicitar vigilancia aérea <ArrowRight size={18} />
+                </a>
+                <a className="btn btnDark" href="#servicios">Ver servicios <ArrowRight size={16} /></a>
+              </div>
+              <div className="heroFeatures">
+                <div className="featureMini"><span className="check"><Check size={15} /></span> Localización precisa</div>
+                <div className="featureMini"><span className="check"><Check size={15} /></span> Reacción inmediata</div>
+                <div className="featureMini"><span className="check"><Check size={15} /></span> Tecnología que salva vidas</div>
+              </div>
             </div>
-          </motion.div>
-        </div>
-      </section>
 
-      <section id="servicios" className="py-20">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8"><div className="mx-auto max-w-3xl text-center"><SectionTag>{t.servicesTag}</SectionTag><h2 className="text-3xl font-black leading-tight md:text-5xl">{t.servicesTitle}</h2><p className="mt-5 text-lg leading-8 text-slate-300">{t.servicesText}</p></div><div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">{t.services.map(({ icon: Icon, image, title, text }) => <div key={title} className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.06] shadow-2xl shadow-black/20 transition hover:-translate-y-1 hover:border-cyan-300/30"><img src={image} alt={title} className="h-48 w-full object-cover" /><div className="p-6"><div className="mb-5 inline-flex rounded-2xl bg-cyan-300/10 p-4 text-cyan-300"><Icon size={30} /></div><h3 className="text-xl font-black">{title}</h3><p className="mt-3 leading-7 text-slate-300">{text}</p></div></div>)}</div></div>
-      </section>
+            <div className="heroMedia" aria-label="Dron profesional en operación nocturna">
+              <div className="heroImage">
+                <div className="scanIcon"><Target size={23} /></div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-      <section id="licencia" className="bg-slate-50 py-20 text-[#020712]"><div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-8"><div><SectionTag>{t.trustTag}</SectionTag><h2 className="text-3xl font-black leading-tight md:text-5xl">{t.trustTitle}</h2><p className="mt-5 text-lg leading-8 text-slate-700">{t.trustText}</p><div className="mt-8 overflow-hidden rounded-[2rem] bg-[#020712] shadow-2xl"><img src={assets.operator} alt="Wilmer Bello Caicedo operador certificado" className="h-[360px] w-full object-cover object-center" /><div className="border-t border-white/10 p-6 text-white"><p className="text-sm font-black uppercase tracking-[0.24em] text-cyan-300">{lang === 'es' ? 'Operador certificado' : 'Certified operator'}</p><h3 className="mt-2 text-2xl font-black">Wilmer Bello Caicedo</h3><p className="mt-2 text-sm text-slate-300">Grupo Drones y Movilidad · AEROVIGIA-DRONES</p></div></div></div><div className="rounded-[2rem] border border-slate-200 bg-white p-7 shadow-2xl"><img src={assets.certificate} alt="Certificado y licencia comercial AEROVIGIA-DRONES" className="mb-6 w-full rounded-[1.5rem] border border-slate-200 object-cover" /><div className="rounded-[1.5rem] border border-cyan-200 bg-gradient-to-br from-white to-cyan-50 p-6"><div className="flex items-start justify-between gap-4"><div><p className="text-sm font-black uppercase tracking-[0.24em] text-cyan-700">{t.licenseLabel}</p><h3 className="mt-3 text-3xl font-black">AEROVIGIA-DRONES</h3><p className="mt-2 font-semibold text-slate-600">Grupo Drones y Movilidad</p></div><div className="rounded-2xl bg-[#020712] p-4 text-cyan-300"><BadgeCheck size={34} /></div></div><div className="my-7 h-px bg-slate-200" /><p className="text-sm font-semibold text-slate-500">{t.licenseText}</p><p className="mt-2 break-all rounded-2xl bg-[#020712] px-5 py-4 text-2xl font-black tracking-wide text-cyan-300">{CONTACT.license}</p><p className="mt-5 text-sm font-bold text-slate-700">{t.certifiedBy}</p><p className="mt-2 text-sm text-slate-500">Security, Supervision and Real-Time Rescue</p></div></div></div></section>
+        <section className="section sectionDark" id="servicios">
+          <div className="container">
+            <div className="sectionTitle">
+              <span className="eyebrow">Soluciones especializadas</span>
+              <h2>Vigilancia aérea profesional para seguridad, protección e infraestructura.</h2>
+              <p>
+                AEROVIGIA-DRONES combina drones, supervisión remota y operación táctica para reducir puntos ciegos,
+                mejorar tiempos de reacción y apoyar decisiones críticas.
+              </p>
+            </div>
 
-      <section id="sectores" className="py-20"><div className="mx-auto max-w-7xl px-6 lg:px-8"><div className="mx-auto max-w-3xl text-center"><SectionTag>{t.sectorsTag}</SectionTag><h2 className="text-3xl font-black leading-tight md:text-5xl">{t.sectorsTitle}</h2></div><div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{t.sectors.map(([Icon, label]) => <div key={label} className="rounded-3xl border border-white/10 bg-white/[0.06] p-6"><Icon className="mb-4 text-cyan-300" size={30} /><p className="text-lg font-black">{label}</p></div>)}</div></div></section>
+            <div className="servicesGrid">
+              {services.map((service) => {
+                const Icon = service.icon
+                return (
+                  <article className="serviceCard" key={service.title}>
+                    <div className="serviceImg" style={{ backgroundImage: `url(${service.image})` }} />
+                    <div className="serviceBody">
+                      <div className="serviceIcon"><Icon size={25} /></div>
+                      <h3>{service.title}</h3>
+                      <p>{service.text}</p>
+                    </div>
+                  </article>
+                )
+              })}
+            </div>
+          </div>
+        </section>
 
-      <section className="bg-white py-20 text-[#020712]"><div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:px-8"><div><SectionTag>{t.processTag}</SectionTag><h2 className="text-3xl font-black leading-tight md:text-5xl">{t.processTitle}</h2><p className="mt-5 text-lg leading-8 text-slate-700">{t.processLead}</p><img src={assets.process} alt="Dron en despliegue de vigilancia aérea" className="mt-8 rounded-[2rem] object-cover shadow-2xl" /></div><div className="space-y-5">{t.process.map((step) => { const Icon = step.icon; return <div key={step.number} className="rounded-3xl bg-slate-50 p-6 shadow-xl"><div className="flex gap-5"><div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#020712] text-lg font-black text-cyan-300">{step.number}</div><div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-cyan-100 text-cyan-700"><Icon size={26} /></div><div><h3 className="text-xl font-black">{step.title}</h3><p className="mt-2 leading-7 text-slate-700">{step.text}</p></div></div></div>; })}</div></div></section>
+        <section className="section sectionLight profileSection" id="perfil">
+          <div className="container profileGrid">
+            <div className="split">
+              <span className="eyebrow">Dirección estratégica</span>
+              <h2>Seguridad aérea liderada con enfoque operativo y preventivo.</h2>
+              <p>
+                La sección de licencia fue reemplazada por un perfil profesional del responsable estratégico del proyecto,
+                conservando una presentación clara, seria y orientada a confianza comercial.
+              </p>
+              <div className="profileInfoList">
+                <div className="infoRow">
+                  <div className="infoIcon">01</div>
+                  <div>
+                    <strong>Seguridad aérea con drones</strong>
+                    <span>Enfoque en vigilancia, supervisión, búsqueda, protección y acompañamiento preventivo.</span>
+                  </div>
+                </div>
+                <div className="infoRow">
+                  <div className="infoIcon">02</div>
+                  <div>
+                    <strong>Operación con visión estratégica</strong>
+                    <span>Servicios diseñados para organizaciones que requieren visibilidad aérea y reacción oportuna.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <section className="relative overflow-hidden py-20"><div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(34,211,238,0.18),transparent_32%),radial-gradient(circle_at_85%_70%,rgba(37,99,235,0.18),transparent_30%)]" /><div className="relative mx-auto max-w-6xl px-6 text-center lg:px-8"><div className="rounded-[2.5rem] border border-cyan-300/20 bg-white/[0.06] p-8 shadow-2xl shadow-cyan-500/10 backdrop-blur md:p-12"><div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-300 text-[#020712] shadow-lg shadow-cyan-500/20"><Search size={32} /></div><p className="text-sm font-black uppercase tracking-[0.24em] text-cyan-300">{lang === 'es' ? 'Asesoría gratuita' : 'Free consultation'}</p><h2 className="mx-auto mt-4 max-w-4xl text-3xl font-black leading-tight md:text-5xl">{t.consultationTitle}</h2><p className="mx-auto mt-5 max-w-3xl text-lg leading-8 text-slate-300">{t.consultationText}</p><div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row"><a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-300 px-7 py-4 font-black text-[#020712] shadow-lg shadow-cyan-500/20 transition hover:scale-[1.02] hover:bg-white">{t.consultationCta} <ArrowRight size={18} /></a><a href={`mailto:${CONTACT.email1}`} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 px-7 py-4 font-black text-white transition hover:bg-white/10">{t.emailCta} <Mail size={18} /></a></div></div></div></section>
+            <div className="profileCard">
+              <img className="profilePhoto" src={wilmerPhoto} alt="Foto profesional de Wilmer Bello Caicedo" />
+              <div className="profileCaption">
+                <span className="eyebrow">Fundador</span>
+                <h3>Wilmer Bello Caicedo</h3>
+                <p>Fundador y Director de Estrategia en Seguridad Aérea con Drones</p>
+                <p>Grupo Drones y Movilidad</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-      <section id="contacto" className="relative overflow-hidden bg-cyan-300 py-20 text-[#020712]"><div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.65),transparent_32%)]" /><div className="relative mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[1fr_0.85fr] lg:items-center lg:px-8"><div><p className="text-sm font-black uppercase tracking-[0.24em]">{t.contactTag}</p><h2 className="mt-3 text-3xl font-black leading-tight md:text-5xl">{t.contactTitle}</h2><p className="mt-5 max-w-2xl text-lg leading-8 text-slate-800">{t.contactText}</p></div><div className="rounded-[2rem] bg-[#020712] p-6 text-white shadow-2xl"><h3 className="text-2xl font-black">AEROVIGIA-DRONES</h3><p className="mt-2 text-slate-400">Grupo Drones y Movilidad</p><div className="mt-6 space-y-4 text-sm text-slate-300"><p><MapPin className="mr-2 inline text-cyan-300" size={18} /> Colombia</p><p><MessageCircle className="mr-2 inline text-cyan-300" size={18} /> {CONTACT.mainPhone}</p><p><Globe2 className="mr-2 inline text-cyan-300" size={18} /> Operación en Colombia</p><p><Mail className="mr-2 inline text-cyan-300" size={18} /> {CONTACT.email1}</p><p><Mail className="mr-2 inline text-cyan-300" size={18} /> {CONTACT.email2}</p></div><div className="mt-7 grid gap-3 sm:grid-cols-2"><a href={whatsappUrl} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-2xl bg-cyan-300 px-5 py-4 font-black text-[#020712] transition hover:bg-white">{t.whatsappCta} <MessageCircle size={18} /></a><a href={`mailto:${CONTACT.email1}`} className="inline-flex items-center justify-center gap-2 rounded-2xl border border-white/15 px-5 py-4 font-black text-white transition hover:bg-white/10">{t.emailCta} <Mail size={18} /></a></div></div></div></section>
+        <section className="section sectionDark" id="sectores">
+          <div className="container">
+            <div className="sectionTitle compactTitle">
+              <span className="eyebrow">Clientes objetivo</span>
+              <h2>Diseñado para organizaciones que necesitan visibilidad aérea, control y reacción.</h2>
+            </div>
 
-      <a href={whatsappUrl} target="_blank" rel="noreferrer" className="fixed bottom-5 right-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-2xl transition hover:scale-110" aria-label="WhatsApp"><MessageCircle size={28} /></a>
-      <footer className="border-t border-white/10 px-6 py-8 text-center text-sm text-slate-500"><p>© 2026 AEROVIGIA-DRONES · Grupo Drones y Movilidad. {t.footer}</p></footer>
-    </main>
-  );
+            <div className="sectorsGrid">
+              {sectors.map((sector) => {
+                const Icon = sector.icon
+                return (
+                  <div className="sectorCard" key={sector.label}>
+                    <Icon size={21} />
+                    <span>{sector.label}</span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="section sectionLight" id="proceso">
+          <div className="container workGrid">
+            <div className="split">
+              <span className="eyebrow">Cómo trabajamos</span>
+              <h2>Del aviso al control visual en tiempo real.</h2>
+              <p>Más visión, menos puntos ciegos y mejor capacidad de reacción.</p>
+              <div className="workImage">
+                <img src={droneControl} alt="Dron en control visual en tiempo real" />
+              </div>
+            </div>
+
+            <div className="steps">
+              {steps.map((step, index) => {
+                const Icon = step.icon
+                return (
+                  <div className="step" key={step.title}>
+                    <div className="stepNumber">{String(index + 1).padStart(2, '0')}</div>
+                    <div className="stepIcon"><Icon size={20} /></div>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.text}</p>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="ctaSection">
+          <div className="container">
+            <div className="ctaBox">
+              <div className="ctaIcon"><Search size={26} /></div>
+              <span className="eyebrow">Asesoría gratuita</span>
+              <h2>¿Te gustaría saber cómo los drones pueden mejorar la seguridad de tu empresa, conjunto o ruta?</h2>
+              <p>
+                Contáctanos y recibe una asesoría gratuita. Revisamos tu necesidad, el tipo de zona,
+                el nivel de riesgo y te orientamos sobre la mejor solución de vigilancia, supervisión o rescate aéreo.
+              </p>
+              <div className="ctaActions">
+                <a className="btn btnPrimary" href={whatsappUrl} target="_blank" rel="noreferrer">
+                  Quiero mi asesoría gratis <ArrowRight size={17} />
+                </a>
+                <a className="btn btnDark" href={`mailto:${PRIMARY_EMAIL}`}>Enviar correo <Mail size={16} /></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section sectionCyan" id="contacto">
+          <div className="container contactGrid">
+            <div className="contactCopy">
+              <span className="eyebrow darkEyebrow">Contacto</span>
+              <h2>¿Necesitas ojos en el cielo para proteger una zona, ruta o persona?</h2>
+              <p>
+                Solicita una evaluación del caso y revisemos cómo AEROVIGIA-DRONES puede apoyar con seguridad aérea,
+                supervisión o rescate en tiempo real en Colombia.
+              </p>
+            </div>
+
+            <div className="contactCard">
+              <h3>AEROVIGIA-DRONES</h3>
+              <small>Grupo Drones y Movilidad</small>
+              <div className="contactList">
+                <div><MapPin size={16} /> Colombia</div>
+                <div><span>☏</span> {PHONE_DISPLAY}</div>
+                <div><Plane size={16} /> Operación en Colombia</div>
+                <div><Mail size={16} /> {PRIMARY_EMAIL}</div>
+                <div><Mail size={16} /> {SECONDARY_EMAIL}</div>
+              </div>
+              <div className="contactActions">
+                <a className="btn btnPrimary" href={whatsappUrl} target="_blank" rel="noreferrer">Hablar por WhatsApp</a>
+                <a className="btn btnDark" href={`mailto:${PRIMARY_EMAIL}`}>Enviar correo <Mail size={16} /></a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="footer">
+        © 2026 AEROVIGIA-DRONES · Grupo Drones y Movilidad. Security, Supervision and Real-Time Rescue · Operación en Colombia
+      </footer>
+
+      <a className="whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="WhatsApp">
+        ☏
+      </a>
+    </div>
+  )
 }
+
+export default App

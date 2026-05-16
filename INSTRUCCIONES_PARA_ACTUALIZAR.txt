@@ -1,0 +1,27 @@
+INSTRUCCIONES PARA ACTUALIZAR LA LANDING EN GITHUB / VERCEL
+
+1. Abre el repositorio en GitHub.
+2. En la raíz del repositorio, entra en "Añadir archivo" > "Subir archivos".
+3. Sube TODO el contenido de esta carpeta, no subas el ZIP:
+
+   - index.html
+   - package.json
+   - vite.config.js
+   - README.md
+   - public/
+   - src/
+
+4. Acepta reemplazar los archivos existentes cuando GitHub lo pida.
+5. Guarda con el botón verde "Commit changes".
+6. Vercel debería actualizar automáticamente la página.
+
+IMPORTANTE:
+- La foto de Wilmer y la imagen del dron están dentro de src/assets.
+- También se dejaron copias en public como respaldo.
+- No elimines la carpeta src/assets.
+
+Configuración Vercel:
+- Framework: Vite
+- Install command: npm install
+- Build command: npm run build
+- Output directory: dist
