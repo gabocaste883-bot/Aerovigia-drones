@@ -193,8 +193,8 @@ function App() {
               <span className="eyebrow">Dirección estratégica</span>
               <h2>Seguridad aérea liderada con enfoque operativo y preventivo.</h2>
               <p>
-                La sección de licencia fue reemplazada por un perfil profesional del responsable estratégico del proyecto,
-                conservando una presentación clara, seria y orientada a confianza comercial.
+                AEROVIGIA-DRONES integra experiencia en seguridad, operación aérea y visión estratégica
+                para ofrecer apoyo visual en tiempo real en escenarios de protección, supervisión y rescate.
               </p>
               <div className="profileInfoList">
                 <div className="infoRow">
