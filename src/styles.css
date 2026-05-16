@@ -544,63 +544,26 @@ select {
   flex: 0 0 auto;
 }
 
-.processSection {
-  position: relative;
-  overflow: hidden;
-  padding: 128px 0;
-  background:
-    linear-gradient(90deg, rgba(2, 7, 17, 0.94) 0%, rgba(2, 7, 17, 0.78) 46%, rgba(2, 7, 17, 0.45) 100%),
-    url('/seguridad-drones-busqueda-tiempo-real.png') center/cover;
-  color: var(--white);
-}
-
-.processSection::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(circle at 72% 42%, rgba(81, 232, 255, 0.24), transparent 33%),
-    linear-gradient(180deg, rgba(2, 7, 17, 0.08), rgba(2, 7, 17, 0.38));
-  pointer-events: none;
-}
-
 .workGrid {
-  position: relative;
-  z-index: 2;
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 58px;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 48px;
   align-items: center;
 }
 
-.processSection .eyebrow {
-  color: var(--cyan);
-}
-
-.processCopy h2 {
-  color: var(--white);
-  text-shadow: 0 18px 56px rgba(0, 0, 0, 0.5);
-}
-
-.processCopy p {
-  color: #d8e7ff;
-  max-width: 560px;
-  font-size: 1.12rem;
-}
-
-.processBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 30px;
-  padding: 14px 18px;
+.workImage {
+  height: 118px;
   border-radius: 18px;
-  background: rgba(81, 232, 255, 0.13);
-  border: 1px solid rgba(81, 232, 255, 0.34);
-  color: var(--cyan);
-  font-weight: 1000;
-  backdrop-filter: blur(14px);
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-top: 28px;
+  background: #020711;
+}
+
+.workImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .steps {
@@ -613,12 +576,10 @@ select {
   grid-template-columns: 52px 44px 1fr;
   gap: 18px;
   align-items: start;
-  background: rgba(11, 18, 31, 0.76);
-  border: 1px solid rgba(81, 232, 255, 0.24);
-  backdrop-filter: blur(18px);
-  padding: 24px;
-  border-radius: 22px;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.30);
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 16px 42px rgba(2, 7, 17, 0.09);
 }
 
 .stepNumber {
@@ -639,18 +600,18 @@ select {
   place-items: center;
   border-radius: 13px;
   background: rgba(81, 232, 255, 0.2);
-  color: var(--cyan);
+  color: #006983;
 }
 
 .step h3 {
-  color: var(--white);
-  font-size: 1.12rem;
-  margin-bottom: 7px;
+  color: #020711;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
 }
 
 .step p {
-  color: #d8e7ff;
-  font-size: 0.98rem;
+  color: #52657e;
+  font-size: 0.96rem;
 }
 
 .ctaSection {
@@ -806,11 +767,6 @@ select {
   .servicesGrid,
   .sectorsGrid {
     grid-template-columns: 1fr;
-  }
-
-  .processSection {
-    padding: 88px 0;
-    background-position: 60% center;
   }
 
   .hero h1 {

@@ -18,6 +18,7 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import wilmerPhoto from './assets/wilmer-bello-caicedo.png'
+import droneControl from './assets/drone-control-visual.png'
 import escoltasValores from './assets/escoltas-aereas-valores.png'
 import seguridadInfraestructuras from './assets/seguridad-infraestructuras.png'
 import proteccionVip from './assets/proteccion-vip-alto-perfil.png'
@@ -245,13 +246,15 @@ function App() {
           </div>
         </section>
 
-        <section className="processSection" id="proceso">
+        <section className="section sectionLight" id="proceso">
           <div className="container workGrid">
-            <div className="split processCopy">
+            <div className="split">
               <span className="eyebrow">Cómo trabajamos</span>
               <h2>Del aviso al control visual en tiempo real.</h2>
-              <p>Más visión, menos puntos ciegos y mejor capacidad de reacción con apoyo aéreo táctico.</p>
-              <div className="processBadge"><Target size={18} /> Monitoreo operativo en tiempo real</div>
+              <p>Más visión, menos puntos ciegos y mejor capacidad de reacción.</p>
+              <div className="workImage">
+                <img src={droneControl} alt="Dron en control visual en tiempo real" />
+              </div>
             </div>
 
             <div className="steps">
